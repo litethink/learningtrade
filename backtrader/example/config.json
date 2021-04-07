@@ -1,0 +1,49 @@
+{
+    "operations": {
+       "plot" :true,
+       "time_period": "minutes",
+       "init_cash": 100000,
+       "sizer":"fixed",
+       "commission": 0.005,
+       "stake": 1
+    },
+
+    "data_set": {
+        "csv_data_set" : {
+            "name": "testcsvdata",
+            "dataname" :"binance_nov_18_mar_19_btc.csv",
+            "time": -1,
+            "datetime": 0,
+            "open": 1,
+            "high": 2,
+            "low": 3,
+            "close": 4,
+            "volume": 5,
+            "openinterest": 6
+        }
+    },
+
+    "strategy_set": {
+        "macd_cross": {
+            "ma_period": 15,
+            "me_long_period": 26,
+            "me_short_period": 12,
+            "macd_period": 9
+        },
+        "double_average": {
+            "ma_indicator" : "wma",
+            "period_short" : 100,
+            "period_long" :10
+        },
+        "vwap_cross": {
+        "ma_indicator": "wma",
+        "vwap_period" :  1000,
+        "ma_period_short" : 30,
+        "ma_period_long" :150
+        }
+        
+    }
+    
+
+
+}

@@ -64,3 +64,10 @@ plt.hist(S[-1], bins=50)
 plt.grid(True)
 plt.xlabel('index level')
 plt.ylabel('frequency')
+
+# 模拟期权到期日的内在价值
+plt.hist(np.maximum(S[-1]-K, 0), bins=50)
+plt.grid(True)
+plt.xlabel('option inner value')
+plt.ylabel('frequency')
+

@@ -45,7 +45,8 @@ def bsm_call_imp_vol(S0, K, T, r, C0, sigma_est, it=100):
 
 
 
-S0 = 100; K=105; T=1.; r=0.05; sigma=0.2
+S0 = 100; K=105; T=1.; r=0.05; sigma=0.2;M=50
+dt =T/M
 S = S0 * np.exp(np.cumsum((r-0.5*sigma**2)*dt + sigma * math.sqrt(dt)
                        * np.random.standard_normal((M+1, I)), axis=0
                       ))

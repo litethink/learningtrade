@@ -1,9 +1,12 @@
 import math
 import numpy as np
-np.random.seed(20000)
-t0 = time()
+from math import sqrt, log
+from scipy import stats
 from time import time
 from matplotlib import pyplot as plt
+
+t0 = time()
+np.random.seed(20000)
 #S0: float
 #        标的物初始价格水平
 #    K: float
@@ -14,9 +17,7 @@ from matplotlib import pyplot as plt
 #       固定无风险短期利率
 #    sigma: float 不能直接观察
 #       波动因子
-import numpy as np
-from math import sqrt, log
-from scipy import stats
+
 #
 # 欧式期权BSM定价公式
 

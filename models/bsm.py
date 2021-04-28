@@ -1,9 +1,9 @@
-from time import time
 import math
 import numpy as np
 np.random.seed(20000)
 t0 = time()
-
+from time import time
+from matplotlib import pyplot as plt
 #S0: float
 #        标的物初始价格水平
 #    K: float

@@ -1,8 +1,12 @@
 import math
 import numpy as np
-np.random.seed(20000)
-t0 = time()
+from math import sqrt, log
+from scipy import stats
+from time import time
+from matplotlib import pyplot as plt
 
+t0 = time()
+np.random.seed(20000)
 #S0: float
 #        标的物初始价格水平
 #    K: float
@@ -13,9 +17,7 @@ t0 = time()
 #       固定无风险短期利率
 #    sigma: float 不能直接观察
 #       波动因子
-import numpy as np
-from math import sqrt, log
-from scipy import stats
+
 #
 # 欧式期权BSM定价公式
 
@@ -45,7 +47,8 @@ def bsm_call_imp_vol(S0, K, T, r, C0, sigma_est, it=100):
 
 
 
-S0 = 100; K=105; T=1.; r=0.05; sigma=0.2
+S0=100; K=105; T=1.; r=0.05; sigma=0.2; M=50; I=20000
+dt = T/M
 S = S0 * np.exp(np.cumsum((r-0.5*sigma**2)*dt + sigma * math.sqrt(dt)
                        * np.random.standard_normal((M+1, I)), axis=0
                       ))
@@ -61,3 +64,10 @@ plt.hist(S[-1], bins=50)
 plt.grid(True)
 plt.xlabel('index level')
 plt.ylabel('frequency')
+
+# 模拟期权到期日的内在价值
+plt.hist(np.maximum(S[-1]-K, 0), bins=50)
+plt.grid(True)
+plt.xlabel('option inner value')
+plt.ylabel('frequency')
+

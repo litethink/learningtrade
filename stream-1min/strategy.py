@@ -33,8 +33,8 @@ class klineCreator:
             return 
         if not self.conts_data.get(tag):
             self.conts_data[tag] = deque(maxlen=self.conts_max)
-        kline = await callback.get_klines(symbol,period,size=2)
-        if kline:
+        ok,error = await callback.get_klines(symbol,period,size=2)
+        if ok:
             _new_data = callback.history.get(tag)  
             self.conts_data[tag].append(_new_data[-1])
             # import pdb
@@ -73,8 +73,11 @@ class klineCreator:
         setattr(self,"{}_f".format(tag),open("{}.txt".format(tag),"w"))
         # import pdb
         # pdb.set_trace()
-        await callback.get_klines(symbol, period, **{"size":size})
-        kline = callback.history.get(tag)
+        ok,error = await callback.get_klines(symbol, period, **{"size":size})
+        if ok:
+            kline = callback.history.get(tag)
+        else:
+            return
         if kline and len(kline) > 0:
             if self._check_kline_ts_continuous(kline):
                 logger.info("Kline datetime continuous!",caller=self)
@@ -125,7 +128,6 @@ class klineCreator:
         self.task.register(self.update_kline, 1, period="1min" , symbol="btc_usdt",callback=huspm,**kwargs)
 
 
-kc = klineCreator(**{"data_lenght":2000,"conts_max":1000})
+kc = klineCreator(data_lenght=2000,conts_max=1000)
 kc.run()
-
 starter.start()
